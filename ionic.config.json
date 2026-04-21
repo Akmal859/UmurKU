@@ -1,0 +1,7 @@
+{
+  "name": "KalkulatorUmur",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
