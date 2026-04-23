@@ -1,20 +1,46 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="blob-1"></div>
+  <div class="blob-2"></div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="main-container">
+    <header>
+      <h1 class="brand"><span>UmurKU</span></h1>
+      <p class="subtitle">Temukan detail perjalanan waktumu</p>
+    </header>
+
+    <div class="glass-input-card">
+      <div class="input-group">
+        <label>Kapan hari istimewamu?</label>
+        <div class="input-wrapper">
+          <ion-icon name="gift-outline"></ion-icon>
+          <ion-input type="date" [(ngModel)]="birthDate"></ion-input>
+        </div>
+      </div>
+      <button class="prime-button" (click)="calculateAge()">
+        Cek Umurku
+      </button>
+    </div>
+
+    <div *ngIf="ageYears !== null" class="results-wrapper">
+      <div class="main-age-display">
+        <span class="big-number">{{ ageYears }}</span>
+        <span class="big-label">Tahun Terlewati</span>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail-box">
+          <span class="num">{{ ageMonths }}</span>
+          <span class="lab">Bulan</span>
+        </div>
+        <div class="detail-box">
+          <span class="num">{{ ageDays }}</span>
+          <span class="lab">Hari</span>
+        </div>
+      </div>
+
+      <div class="footer-quote">
+        <p>"Umur hanyalah angka, petualangan adalah selamanya."</p>
+      </div>
+    </div>
   </div>
 </ion-content>
