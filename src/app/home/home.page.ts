@@ -18,6 +18,11 @@ export class HomePage {
 
   constructor() {}
 
+  // Memastikan sinkronisasi data di HP
+  onDateChange(event: any) {
+    this.birthDate = event.detail.value;
+  }
+
   calculateAge() {
     if (this.birthDate) {
       const today = new Date();
@@ -32,15 +37,12 @@ export class HomePage {
       let months = today.getMonth() - birth.getMonth();
       let days = today.getDate() - birth.getDate();
 
-      // Koreksi jika hari negatif
       if (days < 0) {
         months--;
-        // Ambil jumlah hari di bulan sebelumnya
         const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
         days += lastMonth.getDate();
       }
 
-      // Koreksi jika bulan negatif
       if (months < 0) {
         years--;
         months += 12;

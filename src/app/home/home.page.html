@@ -4,7 +4,7 @@
 
   <div class="main-container">
     <header>
-      <h1 class="brand"><span>UmurKU</span></h1>
+      <h1 class="brand">Umur<span>KU</span></h1>
       <p class="subtitle">Temukan detail perjalanan waktumu</p>
     </header>
 
@@ -13,11 +13,16 @@
         <label>Kapan hari istimewamu?</label>
         <div class="input-wrapper">
           <ion-icon name="gift-outline"></ion-icon>
-          <ion-input type="date" [(ngModel)]="birthDate"></ion-input>
+          <ion-input 
+            type="date" 
+            [(ngModel)]="birthDate" 
+            (ionChange)="onDateChange($event)"
+            placeholder="Pilih Tanggal">
+          </ion-input>
         </div>
       </div>
       <button class="prime-button" (click)="calculateAge()">
-        Cek Umurku
+        Cek Rahasia Umurku
       </button>
     </div>
 
