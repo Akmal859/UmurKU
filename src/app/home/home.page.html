@@ -5,7 +5,7 @@
   <div class="main-container">
     <header>
       <h1 class="brand">Umur<span>KU</span></h1>
-      <p class="subtitle">Temukan detail perjalanan waktumu</p>
+      <p class="subtitle">Analisis mendalam waktu hidupmu</p>
     </header>
 
     <div class="glass-input-card">
@@ -13,38 +13,42 @@
         <label>Kapan hari istimewamu?</label>
         <div class="input-wrapper">
           <ion-icon name="gift-outline"></ion-icon>
-          <ion-input 
-            type="date" 
-            [(ngModel)]="birthDate" 
-            (ionChange)="onDateChange($event)"
-            placeholder="Pilih Tanggal">
-          </ion-input>
+          <ion-input type="date" [(ngModel)]="birthDate" (ionChange)="onDateChange($event)"></ion-input>
         </div>
       </div>
-      <button class="prime-button" (click)="calculateAge()">
-        Cek Rahasia Umurku
-      </button>
+      <button class="prime-button" (click)="calculateAge()">Cek Rahasia Umurku</button>
     </div>
 
     <div *ngIf="ageYears !== null" class="results-wrapper">
+      <div class="extra-info-grid">
+        <div class="info-box">
+          <ion-icon name="star-outline"></ion-icon>
+          <p>Zodiak</p>
+          <h3>{{ zodiacSign }}</h3>
+        </div>
+        <div class="info-box">
+          <ion-icon name="balloon-outline"></ion-icon>
+          <p>Ultah</p>
+          <h3>{{ nextBirthdayDays }} <span>Hari lagi</span></h3>
+        </div>
+      </div>
+
       <div class="main-age-display">
         <span class="big-number">{{ ageYears }}</span>
         <span class="big-label">Tahun Terlewati</span>
       </div>
 
       <div class="detail-grid">
-        <div class="detail-box">
-          <span class="num">{{ ageMonths }}</span>
-          <span class="lab">Bulan</span>
-        </div>
-        <div class="detail-box">
-          <span class="num">{{ ageDays }}</span>
-          <span class="lab">Hari</span>
-        </div>
+        <div class="detail-box"><span class="num">{{ ageMonths }}</span><span class="lab">Bulan</span></div>
+        <div class="detail-box"><span class="num">{{ ageDays }}</span><span class="lab">Hari</span></div>
       </div>
 
-      <div class="footer-quote">
-        <p>"Umur hanyalah angka, petualangan adalah selamanya."</p>
+      <div class="fun-fact-card">
+        <ion-icon name="leaf-outline"></ion-icon>
+        <div class="fact-text">
+          <p>Tahukah kamu?</p>
+          <span>Anda telah bernapas ±<b>{{ breathCount | number }}</b> kali.</span>
+        </div>
       </div>
     </div>
   </div>

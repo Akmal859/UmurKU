@@ -1,7 +1,5 @@
 {
-  "name": "KalkulatorUmur",
-  "integrations": {
-    "capacitor": {}
-  },
+  "name": "UmurKU",
+  "integrations": {},
   "type": "angular"
 }
