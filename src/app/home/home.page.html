@@ -18,7 +18,7 @@
             [(ngModel)]="birthDate" 
             (ionChange)="onDateChange($event)"
             placeholder="hh/bb/tttt"
-            class="custom-input">
+            class="custom-date-input">
           </ion-input>
         </div>
       </div>
@@ -63,10 +63,6 @@
           <p>Tahukah kamu?</p>
           <span>Anda telah bernapas ±<b>{{ breathCount | number }}</b> kali.</span>
         </div>
-      </div>
-
-      <div class="footer-quote">
-        <p>"Umur hanyalah angka, petualangan adalah selamanya."</p>
       </div>
     </div>
   </div>

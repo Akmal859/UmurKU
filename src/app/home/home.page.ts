@@ -28,23 +28,37 @@ export class HomePage implements OnInit {
     });
   }
 
+  // Fungsi yang dipanggil saat input tanggal berubah
   onDateChange(event: any) {
     this.birthDate = event.detail.value;
+    // Jika input dihapus/kosong, langsung hapus semua output
+    if (!this.birthDate) {
+      this.resetData();
+    }
+  }
+
+  resetData() {
+    this.ageYears = null;
+    this.ageMonths = 0;
+    this.ageDays = 0;
+    this.nextBirthdayDays = null;
+    this.zodiacSign = '';
+    this.breathCount = 0;
   }
 
   calculateAge() {
-    // VALIDASI: Jika input kosong
     if (!this.birthDate || this.birthDate === '') {
       alert("Waduh bosku, isi dulu tanggal lahirnya! 🙏");
+      this.resetData();
       return;
     }
 
     const today = new Date();
     const birth = new Date(this.birthDate);
 
-    // VALIDASI: Jika tanggal lahir di masa depan
     if (birth > today) {
       alert("Masa kamu lahir di masa depan? 😅");
+      this.resetData();
       return;
     }
 

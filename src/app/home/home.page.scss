@@ -64,3 +64,35 @@ header {
 }
 
 .footer-quote { text-align: center; margin-top: 30px; p { color: #94a3b8; font-style: italic; font-size: 0.85rem; } }
+
+.input-wrapper {
+  display: flex; align-items: center; background: #f1f5f9; border-radius: 12px;
+  padding: 5px 15px; margin-bottom: 15px; border: 1px solid #e2e8f0;
+  
+  ion-icon { color: #6366f1; font-size: 1.2rem; }
+
+  .custom-date-input {
+    --color: #1e293b !important;
+    font-weight: 600;
+    
+    // Trik agar hh/bb/tttt muncul di beberapa browser mobile
+    &::before {
+      content: attr(placeholder);
+      width: 100%;
+      color: #94a3b8;
+      margin-right: 0.5em;
+      display: none; // Default sembunyi
+    }
+
+    // Munculkan hanya jika input kosong
+    &.has-no-value::before {
+      display: block;
+    }
+  }
+}
+
+// Pastikan input date selalu menampilkan text gelap
+input[type="date"] {
+  color: #1e293b !important;
+  min-height: 40px;
+}
