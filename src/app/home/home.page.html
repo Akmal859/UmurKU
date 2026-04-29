@@ -23,24 +23,28 @@
       <div class="extra-info-grid">
         <div class="info-box">
           <ion-icon name="star-outline"></ion-icon>
-          <p>Zodiak</p>
-          <h3>{{ zodiacSign }}</h3>
-        </div>
+          <p>ZODIAK</p>
+          <h3>{{ zodiacSign }}</h3> </div>
         <div class="info-box">
           <ion-icon name="balloon-outline"></ion-icon>
-          <p>Ultah</p>
-          <h3>{{ nextBirthdayDays }} <span>Hari lagi</span></h3>
-        </div>
+          <p>ULTAH</p>
+          <h3>{{ nextBirthdayDays }} <span>Hari lagi</span></h3> </div>
       </div>
 
       <div class="main-age-display">
         <span class="big-number">{{ ageYears }}</span>
-        <span class="big-label">Tahun Terlewati</span>
+        <span class="big-label">TAHUN TERLEWATI</span>
       </div>
 
       <div class="detail-grid">
-        <div class="detail-box"><span class="num">{{ ageMonths }}</span><span class="lab">Bulan</span></div>
-        <div class="detail-box"><span class="num">{{ ageDays }}</span><span class="lab">Hari</span></div>
+        <div class="detail-box">
+          <span class="num">{{ ageMonths }}</span>
+          <span class="lab">Bulan</span>
+        </div>
+        <div class="detail-box">
+          <span class="num">{{ ageDays }}</span>
+          <span class="lab">Hari</span>
+        </div>
       </div>
 
       <div class="fun-fact-card">
@@ -49,6 +53,10 @@
           <p>Tahukah kamu?</p>
           <span>Anda telah bernapas ±<b>{{ breathCount | number }}</b> kali.</span>
         </div>
+      </div>
+
+      <div class="footer-quote">
+        <p>"Umur hanyalah angka, petualangan adalah selamanya."</p>
       </div>
     </div>
   </div>

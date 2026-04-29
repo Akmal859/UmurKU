@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule, Platform } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { App } from '@capacitor/app'; // Pastikan sudah install: npm install @capacitor/app
+import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
   constructor(private platform: Platform) {}
 
   ngOnInit() {
-    // Logika agar tombol back Android bisa menutup aplikasi
+    // Menangani tombol back Android untuk keluar aplikasi
     this.platform.backButton.subscribeWithPriority(10, () => {
       App.exitApp();
     });
@@ -57,13 +57,15 @@ export class HomePage implements OnInit {
     this.ageMonths = months;
     this.ageDays = days;
 
-    // Hitung Sisa Hari Ultah
+    // Hitung Sisa Hari Ultah (Pastikan variabel ini terisi)
     let nextBday = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
     if (nextBday < today) nextBday.setFullYear(today.getFullYear() + 1);
     this.nextBirthdayDays = Math.ceil((nextBday.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-    // Zodiak & Fun Fact
+    // Zodiak (Pastikan variabel ini terisi)
     this.zodiacSign = this.getZodiac(birth.getDate(), birth.getMonth() + 1);
+    
+    // Fun Fact
     this.breathCount = years * 525600; 
   }
 
