@@ -13,10 +13,18 @@
         <label>Kapan hari istimewamu?</label>
         <div class="input-wrapper">
           <ion-icon name="gift-outline"></ion-icon>
-          <ion-input type="date" [(ngModel)]="birthDate" (ionChange)="onDateChange($event)"></ion-input>
+          <ion-input 
+            type="date" 
+            [(ngModel)]="birthDate" 
+            (ionChange)="onDateChange($event)"
+            placeholder="hh/bb/tttt"
+            class="custom-input">
+          </ion-input>
         </div>
       </div>
-      <button class="prime-button" (click)="calculateAge()">Cek Rahasia Umurku</button>
+      <button class="prime-button" (click)="calculateAge()">
+        Cek Rahasia Umurku
+      </button>
     </div>
 
     <div *ngIf="ageYears !== null" class="results-wrapper">
@@ -24,11 +32,13 @@
         <div class="info-box">
           <ion-icon name="star-outline"></ion-icon>
           <p>ZODIAK</p>
-          <h3>{{ zodiacSign }}</h3> </div>
+          <h3>{{ zodiacSign }}</h3>
+        </div>
         <div class="info-box">
           <ion-icon name="balloon-outline"></ion-icon>
           <p>ULTAH</p>
-          <h3>{{ nextBirthdayDays }} <span>Hari lagi</span></h3> </div>
+          <h3>{{ nextBirthdayDays }} <span>Hari lagi</span></h3>
+        </div>
       </div>
 
       <div class="main-age-display">

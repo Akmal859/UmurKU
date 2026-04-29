@@ -23,7 +23,6 @@ export class HomePage implements OnInit {
   constructor(private platform: Platform) {}
 
   ngOnInit() {
-    // Menangani tombol back Android untuk keluar aplikasi
     this.platform.backButton.subscribeWithPriority(10, () => {
       App.exitApp();
     });
@@ -34,10 +33,20 @@ export class HomePage implements OnInit {
   }
 
   calculateAge() {
-    if (!this.birthDate) return;
+    // VALIDASI: Jika input kosong
+    if (!this.birthDate || this.birthDate === '') {
+      alert("Waduh bosku, isi dulu tanggal lahirnya! 🙏");
+      return;
+    }
 
     const today = new Date();
     const birth = new Date(this.birthDate);
+
+    // VALIDASI: Jika tanggal lahir di masa depan
+    if (birth > today) {
+      alert("Masa kamu lahir di masa depan? 😅");
+      return;
+    }
 
     let years = today.getFullYear() - birth.getFullYear();
     let months = today.getMonth() - birth.getMonth();
@@ -57,15 +66,11 @@ export class HomePage implements OnInit {
     this.ageMonths = months;
     this.ageDays = days;
 
-    // Hitung Sisa Hari Ultah (Pastikan variabel ini terisi)
     let nextBday = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
     if (nextBday < today) nextBday.setFullYear(today.getFullYear() + 1);
     this.nextBirthdayDays = Math.ceil((nextBday.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-    // Zodiak (Pastikan variabel ini terisi)
     this.zodiacSign = this.getZodiac(birth.getDate(), birth.getMonth() + 1);
-    
-    // Fun Fact
     this.breathCount = years * 525600; 
   }
 
