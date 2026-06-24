@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        Override khusus Android 12+ (API 31+).
+        Android 12 memperkenalkan SplashScreen API baru. Tanpa override ini,
+        sistem akan mengabaikan konfigurasi splash lama dan menampilkan ikon
+        launcher default, yang menyebabkan tampilan tidak konsisten.
+
+        Dengan file ini di folder values-v31, atribut di sini akan
+        MENIMPA values/styles.xml khusus untuk Android 12 ke atas.
+    -->
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <!-- Warna latar belakang splash (HARUS sama dengan values/styles.xml) -->
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <!-- Icon yang ditampilkan (pastikan berukuran 288dp x 288dp,
+             dengan area aman 192dp x 192dp di tengah untuk Android 12+) -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <!-- Durasi animasi splash (maks 1000ms untuk non-animated) -->
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <!-- Tema yang dipakai setelah splash selesai -->
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+    </style>
+
+</resources>

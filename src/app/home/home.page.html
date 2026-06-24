@@ -11,15 +11,22 @@
     <div class="glass-input-card">
       <div class="input-group">
         <label>Kapan hari istimewamu?</label>
-        <div class="input-wrapper">
+        <div class="input-wrapper" (click)="openDatePicker()">
           <ion-icon name="gift-outline"></ion-icon>
-          <ion-input 
-            type="date" 
-            [(ngModel)]="birthDate" 
-            (ionChange)="onDateChange($event)"
-            placeholder="hh/bb/tttt"
-            class="custom-date-input">
-          </ion-input>
+          <!-- Tampilan placeholder / tanggal yang dipilih -->
+          <div class="date-display" [class.has-value]="birthDate">
+            <span class="date-placeholder" *ngIf="!birthDate">dd / mm / yyyy</span>
+            <span class="date-value" *ngIf="birthDate">{{ getFormattedDate() }}</span>
+          </div>
+          <ion-icon name="calendar-outline" class="calendar-icon"></ion-icon>
+          <!-- Input date native tersembunyi, dipanggil lewat openDatePicker() -->
+          <input
+            #nativeDateInput
+            type="date"
+            class="hidden-date-input"
+            [value]="birthDate"
+            (change)="onNativeDateChange($event)"
+            max="{{ todayStr }}">
         </div>
       </div>
       <button class="prime-button" (click)="calculateAge()">

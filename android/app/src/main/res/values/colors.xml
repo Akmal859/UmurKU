@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Warna latar belakang splash screen -->
+    <color name="splash_background">#286EC8</color>
+</resources>

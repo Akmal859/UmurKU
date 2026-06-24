@@ -66,33 +66,68 @@ header {
 .footer-quote { text-align: center; margin-top: 30px; p { color: #94a3b8; font-style: italic; font-size: 0.85rem; } }
 
 .input-wrapper {
-  display: flex; align-items: center; background: #f1f5f9; border-radius: 12px;
-  padding: 5px 15px; margin-bottom: 15px; border: 1px solid #e2e8f0;
-  
-  ion-icon { color: #6366f1; font-size: 1.2rem; }
+  display: flex;
+  align-items: center;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
-  .custom-date-input {
-    --color: #1e293b !important;
-    font-weight: 600;
-    
-    // Trik agar hh/bb/tttt muncul di beberapa browser mobile
-    &::before {
-      content: attr(placeholder);
-      width: 100%;
+  &:active {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  }
+
+  ion-icon {
+    color: #6366f1;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .calendar-icon {
+    margin-left: auto;
+    color: #94a3b8;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  // Area tampilan placeholder & nilai tanggal
+  .date-display {
+    flex: 1;
+    padding: 0 10px;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+
+    .date-placeholder {
       color: #94a3b8;
-      margin-right: 0.5em;
-      display: none; // Default sembunyi
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      user-select: none;
     }
 
-    // Munculkan hanya jika input kosong
-    &.has-no-value::before {
-      display: block;
+    .date-value {
+      color: #1e293b;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
     }
   }
-}
 
-// Pastikan input date selalu menampilkan text gelap
-input[type="date"] {
-  color: #1e293b !important;
-  min-height: 40px;
+  // Input native disembunyikan secara visual
+  // TETAPI tetap ada di DOM agar .showPicker() / .click() bisa dipanggil
+  .hidden-date-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+  }
 }

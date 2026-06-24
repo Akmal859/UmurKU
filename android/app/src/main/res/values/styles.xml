@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@null</item>
+    </style>
+
+    <!--
+        Splash Screen Theme untuk Android < 12 (API < 31).
+        Menggunakan windowBackground tradisional dengan drawable splash.
+        Tema ini diterapkan di AndroidManifest.xml pada <activity>.
+    -->
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <!-- Warna latar belakang splash screen (sesuai dengan warna brand) -->
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <!-- Icon/logo yang ditampilkan di tengah splash screen -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <!-- Tema yang dipakai setelah splash selesai -->
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+    </style>
+
+</resources>

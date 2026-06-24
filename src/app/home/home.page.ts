@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, Platform } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,8 @@ import { App } from '@capacitor/app';
   imports: [IonicModule, FormsModule, CommonModule]
 })
 export class HomePage implements OnInit {
+  @ViewChild('nativeDateInput') nativeDateInput!: ElementRef<HTMLInputElement>;
+
   birthDate: string = '';
   ageYears: number | null = null;
   ageMonths: number = 0;
@@ -20,21 +22,46 @@ export class HomePage implements OnInit {
   zodiacSign: string = '';
   breathCount: number = 0;
 
+  // Batas maksimal tanggal (hari ini) agar tidak bisa pilih masa depan
+  todayStr: string = new Date().toISOString().split('T')[0];
+
   constructor(private platform: Platform) {}
 
   ngOnInit() {
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      App.exitApp();
-    });
+    if (this.platform.is('android')) {
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        App.exitApp();
+      });
+    }
   }
 
-  // Fungsi yang dipanggil saat input tanggal berubah
-  onDateChange(event: any) {
-    this.birthDate = event.detail.value;
-    // Jika input dihapus/kosong, langsung hapus semua output
+  // Membuka date picker native Android dengan .showPicker() atau .click()
+  openDatePicker() {
+    const input = this.nativeDateInput?.nativeElement;
+    if (!input) return;
+    try {
+      // showPicker() = cara modern (Chrome 99+ / Android WebView terbaru)
+      (input as any).showPicker();
+    } catch (e) {
+      // Fallback untuk WebView lama
+      input.click();
+    }
+  }
+
+  // Dipanggil saat user memilih tanggal dari native picker
+  onNativeDateChange(event: any) {
+    this.birthDate = event.target.value;
     if (!this.birthDate) {
       this.resetData();
     }
+  }
+
+  // Format tanggal dari "yyyy-mm-dd" (format native) → "dd / mm / yyyy" (tampilan)
+  getFormattedDate(): string {
+    if (!this.birthDate) return '';
+    const parts = this.birthDate.split('-');
+    if (parts.length !== 3) return this.birthDate;
+    return `${parts[2]} / ${parts[1]} / ${parts[0]}`;
   }
 
   resetData() {
@@ -54,7 +81,22 @@ export class HomePage implements OnInit {
     }
 
     const today = new Date();
-    const birth = new Date(this.birthDate);
+    today.setHours(0, 0, 0, 0);
+
+    let birth: Date;
+    if (this.birthDate.includes('-')) {
+      const parts = this.birthDate.split('-');
+      birth = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    } else {
+      birth = new Date(this.birthDate);
+    }
+    birth.setHours(0, 0, 0, 0);
+
+    if (!(birth instanceof Date) || isNaN(birth.getTime())) {
+      alert("Tanggal lahir tidak valid. Silakan pilih tanggal yang benar.");
+      this.resetData();
+      return;
+    }
 
     if (birth > today) {
       alert("Masa kamu lahir di masa depan? 😅");
@@ -85,7 +127,7 @@ export class HomePage implements OnInit {
     this.nextBirthdayDays = Math.ceil((nextBday.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
     this.zodiacSign = this.getZodiac(birth.getDate(), birth.getMonth() + 1);
-    this.breathCount = years * 525600; 
+    this.breathCount = years * 525600;
   }
 
   getZodiac(day: number, month: number) {
